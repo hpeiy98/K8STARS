@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tars-web
+  labels:
+    app: tars-web
+spec:
+  selector:
+    matchLabels:
+      app: tars-web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tars-web
+    spec:
+      containers:
+      - name: tars-web
+        image: ccr.ccs.tencentyun.com/tarsbase/tarsweb:latest
+        ports:
+          - containerPort: 3000
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: tars-db-config
+              key: DB_HOST
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tars-web
+spec:
+  type: NodePort
+  selector:
+    app: tars-web
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30000

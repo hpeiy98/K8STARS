@@ -1,5 +1,0 @@
-version: v1
-application: tars
-server: tars_server
-adapters:
-  - object: MainObj
