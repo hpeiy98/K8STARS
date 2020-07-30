@@ -12,12 +12,13 @@ Here we provide two examples:
    - The file _server_meta.yaml is used to configure services’ metadata. You can refer to the structure of ServerConf in app/genconf/config.go for the field information. The endpoint is `tcp -h ${local_ip} -p ${random_port}` by default and supports automatically filling in IP and random ports.
  
 2. Verify if deployment is successfully
-   - log into db_tars and execute `select * from t_server_conf\G`. You should see that the simpleserver’s node information is registered. 
+   - log into `db_tars` and execute `select * from t_server_conf\G`. You should see that the simpleserver’s node information is registered. 
    - Enter TarsWeb to check if services are deployed successfully
  
 ## Deploy by using Go’s HelloWorld’s program TestApp.HelloGo
-Follow the instruction to deploy [TarsGo development environment](https://tarscloud.github.io/TarsDocs_en/env/tarsgo.html)
-Also refer to the instructions on [creating services with TarsGo](https://tarscloud.github.io/TarsDocs_en/hello-world/tarsgo.html)
+Follow the instruction to deploy [TarsGo development environment](https://tarscloud.github.io/TarsDocs_en/env/tarsgo.html).
+
+Also refer to the instructions on [creating services with TarsGo](https://tarscloud.github.io/TarsDocs_en/hello-world/tarsgo.html).
  
 ### Create a service
 
@@ -159,7 +160,7 @@ module TestApp
 4. Copy the following 5 files under [HelloGo’s Demo](TestApp/HelloGo) to $GOPATH/src/TestApp/HelloGo/ 
 `Dockerfile`、`makefile`、`_server_meta.yaml`、`simpleserver.yaml`、`start.sh` 
 
-5. Modify the ’_server_meta.yaml’ file and fill in the values ​​of the ‘application’, ‘server’, and ‘object’ fields based on your situation. 
+5. Modify the `_server_meta.yaml` file and fill in the values ​​of the `application`, `server`, and `object` fields based on your situation. 
 
    `vim $GOPATH/src/TestApp/HelloGo/_server_meta.yaml`
    ```yaml
@@ -251,7 +252,7 @@ module TestApp
    Successfully tagged ccr.ccs.tencentyun.com/tarsbase/hellogo:20200725145313
    ```
 
-Remember the created image’s name. The example here has the following image name as an example: `ccr.ccs.tencentyun.com/tarsbase/hellogo:20200725145313`
+Remember the created image name. For example, the created image name above is `ccr.ccs.tencentyun.com/tarsbase/hellogo:20200725145313`
 
 9. Modify the `simpleserver.yaml` file and deploy `TestApp.HelloGo` to the kubernetes cluster
 
@@ -291,7 +292,7 @@ Remember the created image’s name. The example here has the following image na
    Execute `kubectl apply -f simpleserver.yaml`
 
 10. Verify Deployment
-   - Log in to db_tars, and execute `select * from t_server_conf\G` to see if HelloGo's node information has been automatically registered.
+   - Log in to `db_tars`, and execute `select * from t_server_conf\G` to see if HelloGo's node information has been automatically registered.
    - Visit TarsWeb to check that the service has been deployed successfully.
 
 ### Client Development
