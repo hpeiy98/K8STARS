@@ -1,4 +1,4 @@
-#Service deployment
+# Service deployment
 Here we provide two examples:
 - Deploy simpleserver
 - Deploy by using Go’s HelloWorld’s program TestApp.HelloGo
@@ -11,7 +11,7 @@ Here we provide two examples:
    - `tarscli genconf` in start.sh will be used to generate tars services’ starting configuration. 
    - The file _server_meta.yaml is used to configure services’ metadata. You can refer to the structure of ServerConf in app/genconf/config.go for the field information. The endpoint is `tcp -h ${local_ip} -p ${random_port}` by default and supports automatically filling in IP and random ports.
  
-2. To verify if deployment is successfully
+2. Verify if deployment is successfully
    - log into db_tars and execute `select * from t_server_conf\G`. You should see that the simpleserver’s node information is registered. 
    - Enter TarsWeb to check if services are deployed successfully
  
@@ -69,13 +69,14 @@ module TestApp
 1. convert the tars protocol file into the format of Golang
 
    ```shell
-cd $GOPATH/src/TestApp/HelloGo/
-$GOPATH/bin/tars2go SayHello.tars
+   cd $GOPATH/src/TestApp/HelloGo/
+   $GOPATH/bin/tars2go SayHello.tars
    ```
 
 2. Implement the server logic:
 
    ```vim $GOPATH/src/TestApp/HelloGo/sayhello_imp.go```
+
   - Calculate `a + b` in `Add`, and assign output to `c`
   - Calculate `a - b` in `Sub`, and assign output to `c`
 
@@ -172,13 +173,15 @@ $GOPATH/bin/tars2go SayHello.tars
 6. Modify `start.sh`, change service name and configuration name based on your actual situation
    
    ```vim $GOPATH/src/TestApp/HelloGo/start.sh```
+   
+   ```shell
    #!/bin/bash
 
    # start server
    ${TARS_PATH}/bin/HelloGo --config=${TARS_PATH}/conf/HelloGo.conf
    ```
 
-7. Modify makefile, fill in `APP` and `TARGET` based on your actual situation. 
+7. Modify `makefile`, fill in `APP` and `TARGET` based on your actual situation. 
 
    `vim $GOPATH/src/TestApp/HelloGo/makefile`
    
@@ -250,9 +253,9 @@ $GOPATH/bin/tars2go SayHello.tars
 
 Remember the created image’s name. The example here has the following image name as an example: `ccr.ccs.tencentyun.com/tarsbase/hellogo:20200725145313`
 
-9. Modify the ‘simpleserver.yaml’ file and deploy ‘TestApp.HelloGo’ to the kubernetes cluster
+9. Modify the `simpleserver.yaml` file and deploy `TestApp.HelloGo` to the kubernetes cluster
 
-`vim $GOPATH/src/TestApp/HelloGo/simpleserver.yaml` Edit the `image`’s value to the image name from the last step. 
+   `vim $GOPATH/src/TestApp/HelloGo/simpleserver.yaml` Edit the `image`’s value to the image name from the last step. 
 
    ```yaml
    apiVersion: apps/v1
@@ -285,12 +288,14 @@ Remember the created image’s name. The example here has the following image na
              periodSeconds: 6
    ```
 
-Execute `kubectl apply -f simpleserver.yaml`
+   Execute `kubectl apply -f simpleserver.yaml`
+
 10. Verify Deployment
-   - Log in to db_tars, and execute select * from t_server_conf\G to see if HelloGo's node information has been automatically registered.
+   - Log in to db_tars, and execute `select * from t_server_conf\G` to see if HelloGo's node information has been automatically registered.
    - Visit TarsWeb to check that the service has been deployed successfully.
 
 ### Client Development
+
 We provide a demo for a [client](TestApp/HelloGo/client) under the directory client.
 
 ```go
